@@ -72,6 +72,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 status: 0))
             ),
           );
+
+          getHistories();
         },
         child: const Icon(Icons.add),
       ),
@@ -111,15 +113,27 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget getHomeWidget() {
-    return FeedBoxWidget();
-    // return feeds.isEmpty ? Container(
-    //   child: const Center(
-    //     child: Text("작성된 피드가 없습니다.\n 오늘의 피드를 작성해주세요.", textAlign: TextAlign.center, style: TextStyle(fontSize: 18),),
-    //   ),
-    // ) : ListView(
-    //   children: List.generate(feeds.length, (idx){
-    //     return Container();
-    //   }),
-    // );
+    // return FeedBoxWidget();
+
+    return feeds.isEmpty ? Container(
+      child: const Center(
+        child: Text("작성된 피드가 없습니다.\n 오늘의 피드를 작성해주세요.", textAlign: TextAlign.center, style: TextStyle(fontSize: 18),),
+      ),
+    ) : ListView(
+      padding: EdgeInsets.fromLTRB(0, 16, 0, 45),
+      children: List.generate(feeds.length, (idx){
+        return InkWell(
+          child:FeedBoxWidget(f: feeds[idx],),
+          onTap: () async{
+            await Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FeedWritePage(f:feeds[idx])),
+            );
+
+            getHistories();
+          },
+        );
+      }),
+    );
   }
 }

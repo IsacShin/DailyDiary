@@ -1,3 +1,12 @@
+
+
+List<String> statusImg = [
+  "assets/img/happy.png",
+  "assets/img/soso.png",
+  "assets/img/sad.png",
+  "assets/img/angry.png"
+];
+
 class Utils {
 
   static String makeTwoDigit(int number) {

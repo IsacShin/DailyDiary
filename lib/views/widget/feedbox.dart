@@ -1,24 +1,27 @@
+import 'package:dailyapp/Commons/utils.dart';
 import 'package:dailyapp/data/data.dart';
+import 'package:dailyapp/main.dart';
+import 'package:dailyapp/views/write.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FeedBoxWidget extends StatelessWidget {
-  final Feed? f;
-  FeedBoxWidget({Key? key, this.f}): super(key: key);
-
-  DateTime dateTime = DateTime.now();
+  final Feed f;
+  FeedBoxWidget({Key? key, required this.f}): super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    DateTime dateTime = Utils.stringToDateTime(f.date.toString());
+
     // TODO: implement build
     return Container(
       margin: EdgeInsets.symmetric(vertical: 16,horizontal: 16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ClipRRect(
-            child: Image.asset("assets/img/test.jpg", fit: BoxFit.fill,),
+            child: Image.asset(f.image, fit: BoxFit.fill, alignment: Alignment.center,),
             borderRadius: BorderRadius.circular(4),
           ),
           Container(
@@ -27,23 +30,23 @@ class FeedBoxWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 10,),
-                Text("오늘은 놀러갔던 날\n오늘은 놀러갔던 날오늘은 놀러갔던 날오늘은 놀러갔던 날오늘은 놀러갔던 날오늘은 놀러갔던 날", style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),),
+                Text(f.title, style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),),
                 SizedBox(height: 10,),
-                Text("오늘은 놀러갔던 날", style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.normal),),
+                Text(f.comment, style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.normal),),
                 SizedBox(height: 10,),
                 Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("${dateTime.year}.${dateTime.month}.${dateTime.day}.${dateTime.hour}.${dateTime.minute}", style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.normal,)),
-                      const CircleAvatar(
+                      Text("${Utils.makeTwoDigit(dateTime.year)}.${Utils.makeTwoDigit(dateTime.month)}.${dateTime.day}", style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.normal,)),
+                      CircleAvatar(
                         radius: 18,
-                        backgroundImage: AssetImage("assets/img/test.jpg"),
+                        backgroundImage: AssetImage(statusImg[f.status]),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(height: 15,),
               ],),
           )
 
@@ -53,9 +56,9 @@ class FeedBoxWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           boxShadow: const [
             BoxShadow(
-                color: Colors.blueGrey,
-                spreadRadius: 4,
-                blurRadius: 4
+                color: Colors.black38,
+                spreadRadius: 2,
+                blurRadius: 2
             )
           ]
       ),

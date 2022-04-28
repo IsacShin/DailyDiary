@@ -42,8 +42,10 @@ class _FeedWritePageState extends State<FeedWritePage> {
         actions: [
           TextButton(
               onPressed: () async {
-                if(feed.image.isEmpty &&
-                      titleController.text.isEmpty &&
+                // 테스트
+                feed.image = "assets/img/test.jpg";
+                if(feed.image.isEmpty ||
+                      titleController.text.isEmpty ||
                         commentController.text.isEmpty) {
                   showAlertDialog(context);
                   return;
@@ -73,8 +75,9 @@ class _FeedWritePageState extends State<FeedWritePage> {
                   height: 150,
                   child: Image.asset("assets/img/plus.png"),
                 ) :
-                AssetThumb(asset: Asset(feed.image,"img_${Utils.getFormatTime(dateTime)}.jpg",0,0),
-                  width: 150, height: 150,),
+                // AssetThumb(asset: Asset(feed.image,"0.jpg",0,0),
+                //   width: 150, height: 150,),
+                Image.asset(feed.image,width: 150,height: 150,),
                 ),
                 aspectRatio: 1/1,
               ),
@@ -196,10 +199,24 @@ class _FeedWritePageState extends State<FeedWritePage> {
               )
             ],
           ));
+        }else if(idx == 4) { // 삭제하기
+          return Container(
+              margin: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+              child: TextButton(
+                child: Text("삭제하기"),
+                onPressed: () async {
+                  final db = DatabaseHelper.instance;
+                  feed.title = titleController.text;
+                  feed.comment = commentController.text;
+                  await db.deleteFeed(feed);
+                  Navigator.of(context).pop();
+                },
+              ),
+          );
         }
         return Container();
       },
-      itemCount: 4,),
+      itemCount: feed.title.isEmpty ? 4 : 5,),
     );
   }
 

@@ -65,6 +65,14 @@ class DatabaseHelper {
     }
   }
 
+  Future<int> deleteFeed(Feed feed) async {
+    Database? db = await instance.database;
+
+    // 삭제
+    final _map = feed.toMap();
+    return await db!.delete(feedTable, where: "id = ?", whereArgs: [feed.id]);
+  }
+
   Future<List<Feed>> queryFeedByDate(int date) async {
     Database? db = await instance.database;
 
