@@ -3,9 +3,10 @@ import 'package:dailyapp/data/data.dart';
 import 'package:dailyapp/data/database.dart';
 import 'package:dailyapp/views/widget/feedbox.dart';
 import 'package:dailyapp/views/write.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -118,6 +119,8 @@ class _MyHomePageState extends State<MyHomePage> {
       return getHomeWidget();
     }else if(currentIndex == 1) { // calendar
       return getCalendarWidget();
+    }else if(currentIndex == 2) { // total
+      return getTotalPage();
     }
 
     return Container();
@@ -194,11 +197,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   dateTime = selectedDay;
                   getDateHistory();
                 },
-                headerStyle: HeaderStyle(
+                headerStyle: const HeaderStyle(
                     titleCentered: true
                 ),
                 calendarFormat: CalendarFormat.month,
-                availableCalendarFormats: {
+                availableCalendarFormats: const {
                   CalendarFormat.month: ""
                 },
               )
@@ -212,5 +215,70 @@ class _MyHomePageState extends State<MyHomePage> {
         itemCount: 2,
       ),
     );
+  }
+
+  Widget getTotalPage() {
+    double radius = MediaQuery.of(context).size.width / 4.1;
+
+    List<PieChartSectionData> pieChartSectionData = [
+      PieChartSectionData(
+        value: 20,
+        title: '20%',
+        color: Color(0xffed733f),
+        radius: radius
+      ),
+      PieChartSectionData(
+        value: 35,
+        title: '35%',
+        color: Color(0xff584f84),
+          radius: radius
+      ),
+      PieChartSectionData(
+        value: 15,
+        title: '15%',
+        color: Color(0xffd86f9b),
+          radius: radius
+      ),
+      PieChartSectionData(
+        value: 30,
+        title: '30%',
+        color: Color(0xffa2663e),
+          radius: radius
+      ),
+    ];
+
+    return Center(
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.95,
+        height: MediaQuery.of(context).size.width * 0.95 * 0.65,
+        padding: EdgeInsets.fromLTRB(0, 10, 20, 10),
+        decoration: BoxDecoration(
+          color: Colors.green,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              "기분 통계",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
+            Expanded(
+                child: Container(
+                  padding: EdgeInsets.only(top: 10),
+                  child: PieChart(PieChartData(
+                      centerSpaceRadius: 0,
+                      sectionsSpace: 0,
+                      sections: pieChartSectionData
+                  ))
+                ))
+          ],
+        ),
+      ),
+    );
+
   }
 }
