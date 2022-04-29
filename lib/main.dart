@@ -222,26 +222,26 @@ class _MyHomePageState extends State<MyHomePage> {
 
     List<PieChartSectionData> pieChartSectionData = [
       PieChartSectionData(
-        value: 20,
-        title: '20%',
+        value: allFeeds.where((f) => f.status == 0).length.toDouble(),
+        title: allFeeds.where((f) => f.status == 0).length.toInt() == 0 ? '' : '행복: ${allFeeds.where((f) => f.status == 0).length.toInt()}',
         color: Color(0xffed733f),
         radius: radius
       ),
       PieChartSectionData(
-        value: 35,
-        title: '35%',
+        value: allFeeds.where((f) => f.status == 1).length.toDouble(),
+        title: allFeeds.where((f) => f.status == 1).length.toInt() == 0 ? '' : '보통: ${allFeeds.where((f) => f.status == 1).length.toInt()}',
         color: Color(0xff584f84),
           radius: radius
       ),
       PieChartSectionData(
-        value: 15,
-        title: '15%',
+        value: allFeeds.where((f) => f.status == 2).length.toDouble(),
+        title: allFeeds.where((f) => f.status == 2).length.toInt() == 0 ? '' : '슬픔: ${allFeeds.where((f) => f.status == 2).length.toInt()}',
         color: Color(0xffd86f9b),
           radius: radius
       ),
       PieChartSectionData(
-        value: 30,
-        title: '30%',
+        value: allFeeds.where((f) => f.status == 3).length.toDouble(),
+        title: allFeeds.where((f) => f.status == 3).length.toInt() == 0 ? '' : '화남: ${allFeeds.where((f) => f.status == 3).length.toInt()}',
         color: Color(0xffa2663e),
           radius: radius
       ),
