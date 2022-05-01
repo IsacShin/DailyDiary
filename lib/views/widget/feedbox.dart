@@ -4,6 +4,7 @@ import 'package:dailyapp/main.dart';
 import 'package:dailyapp/views/write.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_image_picker2/multi_image_picker2.dart';
 
 class FeedBoxWidget extends StatelessWidget {
   final Feed f;
@@ -21,7 +22,8 @@ class FeedBoxWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ClipRRect(
-            child: Image.asset(f.image, fit: BoxFit.fill, alignment: Alignment.center,),
+            //child: Image.network(f.image, fit: BoxFit.fill, alignment: Alignment.center,),
+            child: AssetThumb(asset: Asset(f.image,"0.jpg",0,0), width: 350, height: 300,),
             borderRadius: BorderRadius.circular(4),
           ),
           Container(

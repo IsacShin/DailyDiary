@@ -43,7 +43,7 @@ class _FeedWritePageState extends State<FeedWritePage> {
           TextButton(
               onPressed: () async {
                 // 테스트
-                feed.image = "assets/img/test.jpg";
+                //feed.image = "assets/img/test.jpg";
                 if(feed.image.isEmpty ||
                       titleController.text.isEmpty ||
                         commentController.text.isEmpty) {
@@ -75,9 +75,9 @@ class _FeedWritePageState extends State<FeedWritePage> {
                   height: 150,
                   child: Image.asset("assets/img/plus.png"),
                 ) :
-                // AssetThumb(asset: Asset(feed.image,"0.jpg",0,0),
-                //   width: 150, height: 150,),
-                Image.asset(feed.image,width: 150,height: 150,),
+                AssetThumb(asset: Asset(feed.image,"0.jpg",0,0),
+                  width: 150, height: 150,),
+                //Image.asset(feed.image,width: 150,height: 150,),
                 ),
                 aspectRatio: 1/1,
               ),

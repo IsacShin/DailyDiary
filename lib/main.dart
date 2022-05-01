@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: false,
       home: const MyHomePage(),
     );
   }
@@ -218,7 +219,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget getTotalPage() {
-    double radius = MediaQuery.of(context).size.width / 4.1;
+    double radius = MediaQuery.of(context).size.width / 4.0;
 
     List<PieChartSectionData> pieChartSectionData = [
       PieChartSectionData(
@@ -267,7 +268,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontWeight: FontWeight.bold),
             ),
             Expanded(
-                child: Container(
+                child: allFeeds.isEmpty ? Container() : Container(
                   padding: EdgeInsets.only(top: 10),
                   child: PieChart(PieChartData(
                       centerSpaceRadius: 0,

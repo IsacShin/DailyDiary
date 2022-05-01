@@ -91,7 +91,7 @@ class DatabaseHelper {
 
     List<Feed> feeds = [];
 
-    final query = await db!.query(feedTable);
+    final query = await db!.query(feedTable,orderBy: "date DESC");
     for(final q in query) {
       feeds.add(Feed.fromDB(q));
     }
