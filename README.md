@@ -1,4 +1,4 @@
-# DailyDiary
+# (Flutter)DailyDiary
 
 - SQLite를 이용한 데이터 저장,수정,삭제 기능
 - multi image picker를 이용한 이미지 업로드 기능 구현
